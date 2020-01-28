@@ -456,6 +456,11 @@
 	export_constant(MF_PRIVATEAIRSHIP_SOURCE);
 	export_constant(MF_PRIVATEAIRSHIP_DESTINATION);
 	export_constant(MF_SKILL_DURATION);
+	// Battleground eAmod [Easycore]
+	export_constant(MF_NOECALL);
+	export_constant(MF_BG_CONSUME);
+	export_constant(MF_WOE_CONSUME);
+	export_constant(MF_BG_TOPSCORE);	
 
 	/* setcell types */
 	export_constant(CELL_WALKABLE);

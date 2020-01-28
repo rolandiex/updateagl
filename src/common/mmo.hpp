@@ -674,6 +674,7 @@ struct guild {
 	struct guild_alliance alliance[MAX_GUILDALLIANCE];
 	struct guild_expulsion expulsion[MAX_GUILDEXPULSION];
 	struct guild_skill skill[MAX_GUILDSKILL];
+	int skill_block_timer[MAX_GUILDSKILL]; // BG eAmod [Easycore]
 	struct Channel *channel;
 	unsigned short instance_id;
 	time_t last_leader_change;

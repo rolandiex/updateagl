@@ -579,6 +579,10 @@ enum e_mapflag : int16 {
 	MF_PRIVATEAIRSHIP_SOURCE,
 	MF_PRIVATEAIRSHIP_DESTINATION,
 	MF_SKILL_DURATION,
+	MF_NOECALL, // [BattleGround System] [Easycore]
+	MF_BG_CONSUME, // allows using BG consumables [Easycore]
+	MF_WOE_CONSUME, // allows using WoE consumables [Easycore]
+	MF_BG_TOPSCORE,	
 	MF_MAX
 };
 

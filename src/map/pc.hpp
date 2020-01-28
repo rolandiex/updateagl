@@ -289,6 +289,10 @@ struct map_session_data {
 		bool mail_writing; // Whether the player is currently writing a mail in RODEX or not
 		bool cashshop_open;
 		bool sale_open;
+		// BG eAmod [Easycore]
+		unsigned bg_afk : 1;
+		unsigned int bg_listen : 1;
+		unsigned int only_walk : 1;
 		bool refineui_open;
 	} state;
 	struct {
@@ -627,6 +631,16 @@ struct map_session_data {
 	const char* debug_file;
 	int debug_line;
 	const char* debug_func;
+	
+	//======================
+	//BG eAmod [Easycore]
+	//======================
+	struct battleground_data *bmaster_flag;
+	unsigned short bg_kills; // Battleground Kill Count
+	struct queue_data *qd;
+	// Battleground and Queue System
+	unsigned short bg_team;
+	//======================	
 
 	unsigned int bg_id;
 
@@ -1325,6 +1339,8 @@ void pc_show_questinfo(struct map_session_data *sd);
 void pc_show_questinfo_reinit(struct map_session_data *sd);
 
 bool pc_job_can_entermap(enum e_job jobid, int m, int group_lv);
+
+int pc_update_last_action(struct map_session_data *sd);
 
 #if defined(RENEWAL_DROP) || defined(RENEWAL_EXP)
 int pc_level_penalty_mod(int level_diff, uint32 mob_class, enum e_mode mode, int type);
