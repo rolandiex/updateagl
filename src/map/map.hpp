@@ -729,7 +729,7 @@ struct map_data {
 	int16 m;
 	int16 xs,ys; // map dimensions (in cells)
 	int16 bxs,bys; // map dimensions (in blocks)
-	int16 bgscore_lion, bgscore_eagle; // Battleground ScoreBoard
+	int16 bgscore_lion, bgscore_eagle, bgscore_top; // Battleground ScoreBoard
 	int npc_num;
 	int users;
 	int users_pvp;

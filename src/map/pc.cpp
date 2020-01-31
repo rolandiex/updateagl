@@ -4508,7 +4508,6 @@ int pc_getcash(struct map_session_data *sd, int cash, int points, e_log_pick_typ
 short pc_search_inventory(struct map_session_data *sd, unsigned short nameid) {
 	short i,x,y;
 	nullpo_retr(-1, sd);
-	
 	if (map_getmapflag(sd->bl.m, MF_BG_CONSUME)) {
 		ARR_FIND( 0, MAX_INVENTORY, x, sd->inventory.u.items_inventory[x].nameid == nameid && ( MakeDWord(sd->inventory.u.items_inventory[x].card[2], sd->inventory.u.items_inventory[x].card[3]) == battle_config.bg_reserved_char_id ) && (sd->inventory.u.items_inventory[x].amount > 0 || nameid == 0) );
 			if( x < MAX_INVENTORY ) return x;
@@ -4517,7 +4516,6 @@ short pc_search_inventory(struct map_session_data *sd, unsigned short nameid) {
 		ARR_FIND( 0, MAX_INVENTORY, y, sd->inventory.u.items_inventory[y].nameid == nameid && ( MakeDWord(sd->inventory.u.items_inventory[y].card[2], sd->inventory.u.items_inventory[y].card[3]) == battle_config.woe_reserved_char_id ) && (sd->inventory.u.items_inventory[y].amount > 0 || nameid == 0) );
 			if( y < MAX_INVENTORY ) return y;
 	}
-
 	ARR_FIND( 0, MAX_INVENTORY, i, sd->inventory.u.items_inventory[i].nameid == nameid && (sd->inventory.u.items_inventory[i].amount > 0 || nameid == 0) );
 	return ( i < MAX_INVENTORY ) ? i : -1;
 }
@@ -5033,14 +5031,12 @@ int pc_useitem(struct map_session_data *sd,int n)
 		}
 		return 0;/* regardless, effect is not run */
 	}
-	
 	if( sd->inventory.u.items_inventory[n].card[0] == CARD0_CREATE) {
 		if (MakeDWord(sd->inventory.u.items_inventory[n].card[2], sd->inventory.u.items_inventory[n].card[3]) == battle_config.bg_reserved_char_id && !map_getmapflag(sd->bl.m, MF_BG_CONSUME))
 			return 0;
 		if (MakeDWord(sd->inventory.u.items_inventory[n].card[2], sd->inventory.u.items_inventory[n].card[3]) == battle_config.woe_reserved_char_id && !map_getmapflag(sd->bl.m, MF_WOE_CONSUME))
 			return 0;
 	}
-	
 	sd->itemid = item.nameid;
 	sd->itemindex = n;
 	if(sd->catch_target_class != PET_CATCH_FAIL) //Abort pet catching.
@@ -12807,7 +12803,6 @@ int pc_update_last_action(struct map_session_data *sd)
 
 	return 1;
 }
-
 struct s_attendance_period* pc_attendance_period(){
 	uint32 date = date_get(DT_YYYYMMDD);
 

@@ -16,7 +16,7 @@ struct battleground_member_data {
 };
 
 struct battleground_data {
-	unsigned int bg_id;
+	unsigned int bg_id;	
 	int count;
 	time_t creation_tick; // Creation of this Team
 	// Team Leader and BG Skills features
@@ -27,7 +27,7 @@ struct battleground_data {
 	// Party - Faction ID
 	int pf_id;
 	// Fake Guild Link
-	struct guild *g;
+	struct guild *g;	
 	struct battleground_member_data members[MAX_BG_MEMBERS];
 	// BG Cementery
 	unsigned short mapindex, x, y;
@@ -35,9 +35,8 @@ struct battleground_data {
 	char logout_event[EVENT_NAME_LENGTH];
 	char die_event[EVENT_NAME_LENGTH];
 	// Score Board
-	int team_score;
+	int team_score;	
 };
-
 struct queue_member {
 	int position;
 	struct map_session_data *sd;
@@ -98,5 +97,4 @@ void bg_block_skill_start (struct battleground_data *bg, int skillnum, t_tick ti
 
 void bg_reload(void);
 void bg_guild_build_data(void);
-
 #endif /* BATTLEGROUND_HPP */

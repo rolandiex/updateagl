@@ -779,7 +779,6 @@ bool storage_guild_additem(struct map_session_data* sd, struct s_storage* stor, 
 		clif_displaymessage (sd->fd, msg_txt(sd,264));
 		return 1;
 	}
-
 	if(itemdb_isstackable2(id)) { //Stackable
 		for(i = 0; i < stor->max_amount; i++) {
 			if(compare_item(&stor->u.items_guild[i], item_data)) {

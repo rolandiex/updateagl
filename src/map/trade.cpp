@@ -8,7 +8,6 @@
 
 #include "../common/nullpo.hpp"
 #include "../common/socket.hpp"
-#include "../common/utils.hpp"
 
 #include "atcommand.hpp"
 #include "battle.hpp"
@@ -21,6 +20,7 @@
 #include "pc.hpp"
 #include "pc_groups.hpp"
 #include "storage.hpp"
+#include "../common/utils.hpp"
 
 #define TRADE_DISTANCE 2 ///Max distance from traders to enable a trade to take place.
 
@@ -391,12 +391,14 @@ void trade_tradeadditem(struct map_session_data *sd, short index, short amount)
 		clif_tradeitemok(sd, index+2, 1);
 		return;
 	}
+	
 	if( item->card[0]==CARD0_CREATE && (MakeDWord(item->card[2],item->card[3])== (battle_config.bg_reserved_char_id || battle_config.woe_reserved_char_id )&& !battle_config.bg_can_trade) )
 	{	// "Battleground's Items"
 		clif_displaymessage (sd->fd, msg_txt(sd,260));
 		clif_tradeitemok(sd, index+2, 1);
 		return;
 	}
+	
 	if( ((item->bound == BOUND_ACCOUNT || item->bound > BOUND_GUILD) || (item->bound == BOUND_GUILD && sd->status.guild_id != target_sd->status.guild_id)) && !pc_can_give_bounded_items(sd) ) { // Item Bound
 		clif_displaymessage(sd->fd, msg_txt(sd,293));
 		clif_tradeitemok(sd, index+2, 1);

@@ -5739,6 +5739,7 @@ BUILDIN_FUNC(warpguild)
 
 	return SCRIPT_CMD_SUCCESS;
 }
+
 int viewpointmap_sub(struct block_list *bl, va_list ap)
 {
 	struct map_session_data *sd;
@@ -5888,6 +5889,7 @@ static int bg_cleanmap_sub(struct block_list *bl, va_list ap)
 	map_clearflooritem(bl);
 	return SCRIPT_CMD_SUCCESS;
 }
+
 /*==========================================
  * Force Heal a player (hp and sp)
  *------------------------------------------*/
@@ -10694,6 +10696,7 @@ BUILDIN_FUNC(donpcevent)
 		script_pushint(st, 1);
 	return SCRIPT_CMD_SUCCESS;
 }
+
 /*==========================================
  *------------------------------------------*/
 BUILDIN_FUNC(donpceventall)
@@ -12953,7 +12956,7 @@ BUILDIN_FUNC(flagemblem)
 
 	if(g_id < 0)
 		return SCRIPT_CMD_SUCCESS;
-	
+
 	if( script_hasdata(st,3) )
 		flag = 1;
 
@@ -19530,8 +19533,7 @@ BUILDIN_FUNC(waitingroom2bg)
 
 	x = script_getnum(st,3);
 	y = script_getnum(st,4);
-	guild_index = script_getnum(st, 5);
-	
+	guild_index = script_getnum(st,5);
 	if(script_hasdata(st,6))
 		ev = script_getstr(st,6); // Logout Event
 	if(script_hasdata(st,7))
@@ -19542,7 +19544,6 @@ BUILDIN_FUNC(waitingroom2bg)
 
 	guild_index = cap_value(guild_index, 0, 12);
 	if ((bg_id = bg_create(mapindex, x, y, guild_index, ev, dev)) == 0)
-
 	{ // Creation failed
 		script_pushint(st,0);
 		return SCRIPT_CMD_SUCCESS;
@@ -25460,7 +25461,7 @@ struct script_function buildin_func[] = {
 	BUILDIN_DEF(bg_monster_reveal,"iii"),
 	BUILDIN_DEF(donpceventall,"s"),
 	BUILDIN_DEF2(flagemblem, "flagemblembg", "ii"),
-	
+
 	// Instancing
 	BUILDIN_DEF(instance_create,"s??"),
 	BUILDIN_DEF(instance_destroy,"?"),

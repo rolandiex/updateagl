@@ -693,7 +693,7 @@ bool skill_isNotOk(uint16 skill_id, struct map_session_data *sd)
 		clif_skill_fail(sd,skill_id,USESKILL_FAIL_SKILLINTERVAL,0);
 		// I don't know why 'cooldown msg' doesn't appears in Guild Skills [Easycore]
 		if (skill_id >= 10010 && skill_id <= 10013)
-			clif_displaymessage(sd->fd,"[Guild Skill] Cannot use the skill due to cooldown delay");
+			clif_displaymessage(sd->fd,"[Guild Skill] Cannot use the skill due to cooldown delay"); 		
 		return true;
 	}
 
@@ -784,10 +784,14 @@ bool skill_isNotOk(uint16 skill_id, struct map_session_data *sd)
 			break;
 		case GD_EMERGENCYCALL:
 		case GD_ITEMEMERGENCYCALL:
+			if (map_getmapflag(m, MF_NOECALL)) {
+				clif_displaymessage(sd->fd,"Cannot use Emergency Call in this map.");
+				return true;
+			}		
 			if (
-				!(battle_config.emergency_call&((is_agit_start())?2:1)) ||
+				!map_getmapflag(m, MF_BATTLEGROUND) && (!(battle_config.emergency_call&((is_agit_start())?2:1)) ||
 				!(battle_config.emergency_call&(mapdata_flag_gvg2(mapdata)?8:4)) ||
-				(battle_config.emergency_call&16 && mapdata->flag[MF_NOWARPTO] && !(mapdata->flag[MF_GVG_CASTLE] || mapdata->flag[MF_GVG_TE_CASTLE]))
+				(battle_config.emergency_call&16 && map_getmapflag(m, MF_NOWARPTO) && !(map_getmapflag(m, MF_GVG_CASTLE) || map_getmapflag(m, MF_GVG_TE_CASTLE))))
 			)	{
 				clif_skill_fail(sd,skill_id,USESKILL_FAIL_LEVEL,0);
 				return true;
@@ -8815,7 +8819,6 @@ int skill_castend_nodamage_id (struct block_list *src, struct block_list *bl, ui
 					clif_skill_nodamage(src,bl,AL_HEAL,status_percent_heal(bl,90,90),1);
 				else
 					sc_start(src,bl,type,100,skill_lv,skill_get_time(skill_id, skill_lv));
-			
 		} else if (status_get_guild_id(src) || (map_getmapflag(src->m, MF_BATTLEGROUND) && bg_team_get_id(src))) {
 			clif_skill_nodamage(src,bl,skill_id,skill_lv,1);
 			map_foreachinallrange(skill_area_sub, src,
@@ -16095,7 +16098,7 @@ bool skill_check_condition_castend(struct map_session_data* sd, uint16 skill_id,
 		if( !require.itemid[i] )
 			continue;
 		index[i] = pc_search_inventory(sd,require.itemid[i]);
-		if( index[i] < 0 || sd->inventory.u.items_inventory[index[i]].amount < require.amount[i] ) {
+		if( index[i] < 0 || sd->inventory.u.items_inventory[index[i]].amount < require.amount[i] ||
 			sd->inventory.u.items_inventory[index[i]].card[0] == CARD0_CREATE && 
 			((MakeDWord(sd->inventory.u.items_inventory[index[i]].card[2], sd->inventory.u.items_inventory[index[i]].card[3]) == 
 			battle_config.bg_reserved_char_id && !map_getmapflag(sd->bl.m, MF_BG_CONSUME)) ||

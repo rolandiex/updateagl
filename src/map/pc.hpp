@@ -289,11 +289,11 @@ struct map_session_data {
 		bool mail_writing; // Whether the player is currently writing a mail in RODEX or not
 		bool cashshop_open;
 		bool sale_open;
+		bool refineui_open;
 		// BG eAmod [Easycore]
 		unsigned bg_afk : 1;
 		unsigned int bg_listen : 1;
-		unsigned int only_walk : 1;
-		bool refineui_open;
+		unsigned int only_walk : 1;		
 	} state;
 	struct {
 		unsigned char no_weapon_damage, no_magic_damage, no_misc_damage;
@@ -631,7 +631,6 @@ struct map_session_data {
 	const char* debug_file;
 	int debug_line;
 	const char* debug_func;
-	
 	//======================
 	//BG eAmod [Easycore]
 	//======================
@@ -640,8 +639,7 @@ struct map_session_data {
 	struct queue_data *qd;
 	// Battleground and Queue System
 	unsigned short bg_team;
-	//======================	
-
+	//======================
 	unsigned int bg_id;
 
 #ifdef SECURE_NPCTIMEOUT

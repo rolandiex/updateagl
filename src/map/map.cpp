@@ -1951,7 +1951,6 @@ void map_reqnickdb(struct map_session_data * sd, int charid)
 	struct map_session_data* tsd;
 
 	nullpo_retv(sd);
-	
 	if (battle_config.bg_reserved_char_id && battle_config.bg_reserved_char_id == charid)
 	{
 		clif_solved_charname(sd->fd, charid, "Battleground");
@@ -1963,7 +1962,6 @@ void map_reqnickdb(struct map_session_data * sd, int charid)
 		clif_solved_charname(sd->fd, charid, "WoE");
 		return;
 	}
-	
 	tsd = map_charid2sd(charid);
 	if( tsd )
 	{

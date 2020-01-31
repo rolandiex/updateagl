@@ -60,6 +60,7 @@ struct battleground_data* bg_team_search(int bg_id)
 	return (struct battleground_data *)idb_get(bg_team_db, bg_id);
 }
 
+
 int bg_countlogin(struct map_session_data *sd, bool check_bat_room)
 {
 	int c = 0, m = map_mapname2mapid("bat_room");
@@ -292,13 +293,6 @@ int bg_send_dot_remove(struct map_session_data *sd) {
 	return 0;
 }
 
-int bg_send_dot_remove(struct map_session_data *sd)
-{
-	if( sd && sd->bg_id )
-		clif_bg_xy_remove(sd);
-	return 0;
-}
-
 int bg_team_join(int bg_id, struct map_session_data *sd)
 { // Player joins team
 	int i;
@@ -377,8 +371,8 @@ int bg_team_leave(struct map_session_data *sd, int flag)
 
 	// Packets
 	if (battle_config.bg_eAmod_mode) clif_bg_leave_single(sd, sd->status.name, "Leaving Battle...");
-
 	bg_send_dot_remove(sd);
+//	bg_id = sd->bg_id;
 	sd->bg_id = 0;
 	sd->bg_kills = 0;
 	sd->state.bg_afk = 0;
@@ -404,7 +398,6 @@ int bg_team_leave(struct map_session_data *sd, int flag)
 		clif_name_area(&sd->bl);
 		clif_guild_emblem_area(&sd->bl);
 	}
-
 	if (!bgd) return 0;
 
 	ARR_FIND(0, MAX_BG_MEMBERS, i, bgd->members[i].sd == sd);
@@ -492,7 +485,6 @@ int bg_create(unsigned short mapindex, short rx, short ry, int guild_index, cons
 
 	return bg->bg_id;
 }
-
 struct guild* bg_guild_get(int bg_id)
 { // Return Fake Guild for BG Members
 	struct battleground_data *bg = bg_team_search(bg_id);
@@ -612,6 +604,7 @@ TIMER_FUNC(bg_send_xy_timer){
 
 	return 0;
 }
+
 void bg_guild_build_data(void)
 {
 	int i, j, k, skill;
@@ -1082,3 +1075,4 @@ void do_final_battleground(void)
 	bg_team_db->destroy(bg_team_db, NULL);
 	bg_queue_db->destroy(bg_queue_db, queue_db_final);
 }
+

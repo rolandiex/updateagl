@@ -56,7 +56,7 @@ obj:
 
 $(COMMON_AR): $(COMMON_DIR_OBJ)
 	@echo "	AR	$@"
-	@/opt/rh/devtoolset-4/root/usr/bin/ar rcs $(COMMON_AR) $(COMMON_DIR_OBJ)
+	@/opt/rh/devtoolset-7/root/usr/bin/ar rcs $(COMMON_AR) $(COMMON_DIR_OBJ)
 
 common: obj $(COMMON_DIR_OBJ) $(LIBCONFIG_AR) $(YAML_CPP_AR) $(COMMON_AR)
 

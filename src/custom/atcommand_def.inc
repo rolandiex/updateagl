@@ -9,3 +9,9 @@
  **/
 
 //ACMD_DEF(newcommand),
+//BG eAmod [Easycore]
+ACMD_DEF(listenbg),
+ACMD_DEF(order),
+ACMD_DEF(leader),
+ACMD_DEF(reportafk),
+ACMD_DEF(bgskill),
